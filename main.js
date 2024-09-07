@@ -8,10 +8,19 @@ document.querySelectorAll('input[type="radio"]').forEach((radio) => {
   });
 });
 
-var curDate = new Date("2024-09-08").getTime();
+// Target date and time in UTC (September 8th, 2024, 12:00 AM UTC)
+// Target date and time in IST (September 8th, 2024, 12:00 AM IST)
+var curDate = new Date("2024-09-08T00:00:00+05:30").getTime();
 
 var a = setInterval(() => {
-  var now = new Date().getTime();
+  var now = new Date().getTime(); // Current time in local timezone
+
+  console.log("Current Time (Local): ", new Date(now).toString());
+  console.log(
+    "Target Time (IST): ",
+    new Date(curDate).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
   var dist = curDate - now;
 
   var day = Math.floor(
@@ -22,38 +31,32 @@ var a = setInterval(() => {
   var sec = Math.floor((dist % (1000 * 60)) / 1000);
   var month = Math.floor(dist / (1000 * 60 * 60 * 24 * 30.4));
 
+  // Display the calculated countdown
   document.getElementById("1").innerHTML = month >= 0 ? month : 0;
   document.getElementById("2").innerHTML = day >= 0 ? day : 0;
   document.getElementById("3").innerHTML = hour >= 0 ? hour : 0;
   document.getElementById("4").innerHTML = min >= 0 ? min : 0;
   document.getElementById("5").innerHTML = sec >= 0 ? sec : 0;
 
+  // Check if countdown has finished
   if (month <= 0 && day <= 0 && hour <= 0 && min <= 0 && sec <= 0) {
-    // Clear the interval to stop the countdown
     clearInterval(a);
 
-    // Append cake image with the sliding effect
     var cakeImg = document.createElement("img");
     var happyBirthdayText = document.getElementById("count");
 
     var wrapper = document.getElementById("circle1");
-
-    // Add the 'visible' class and remove the 'invisible' class
-    // wrapper.classList.add("visible");
     wrapper.classList.remove("invisible");
 
     happyBirthdayText.innerHTML = "Happy Birthday yayaya!❤️";
-    // Set the text content for the paragraph
 
-    cakeImg.src = "cake2.png"; // Replace with the actual path to your cake image
+    cakeImg.src = "cake2.png";
     cakeImg.alt = "Cake";
     cakeImg.classList.add("slide-up");
     cakeImg.classList.add("cakee");
 
-    // Append the image and text to the container with class "dynamic"
     document.querySelector(".dynamic").appendChild(cakeImg);
 
-    // Optionally, add the "show" class to trigger the animation
     setTimeout(function () {
       cakeImg.classList.add("show");
       happyBirthdayText.classList.add("show");
