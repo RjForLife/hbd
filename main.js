@@ -10,7 +10,7 @@ document.querySelectorAll('input[type="radio"]').forEach((radio) => {
 
 // Target date and time in UTC (September 8th, 2024, 12:00 AM UTC)
 // Target date and time in IST (September 8th, 2024, 12:00 AM IST)
-var curDate = new Date("2024-09-08T00:00:00+05:30").getTime();
+var curDate = new Date("2025-09-08T00:00:00+05:30").getTime();
 
 var a = setInterval(() => {
   var now = new Date().getTime(); // Current time in local timezone
